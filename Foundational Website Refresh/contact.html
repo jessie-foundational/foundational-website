@@ -608,13 +608,14 @@ p + p { margin-top: 1em; }
 .form-success-icon {
   width: 56px;
   height: 56px;
-  background: var(--orange-soft);
+  background: #E8F8F0;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
   margin: 0 auto 1.25rem;
+  color: #27AE60;
 }
 .form-success h3 { color: var(--text-dark); margin-bottom: 0.5rem; }
 .form-success p  { color: var(--text-gray); font-size: 0.92rem; margin: 0 auto; }
@@ -968,7 +969,7 @@ p + p { margin-top: 1em; }
   <section class="form-section">
     <div class="container">
       <div class="form-wrap">
-        <div class="section-header">
+        <div class="section-header" id="formHeader">
           <p class="section-label">Send a Message</p>
           <h2>Tell me what's on your mind.</h2>
           <p>Fill out the form below and I'll follow up within a couple of business days. The more context you can share, the better.</p>
@@ -1066,7 +1067,7 @@ p + p { margin-top: 1em; }
         body: new FormData(form),
         headers: { 'Accept': 'application/json' }
       }).then(r => {
-        if (r.ok) { form.style.display = 'none'; success.classList.add('visible'); window.scrollTo({ top: success.offsetTop - 120, behavior: 'smooth' }); }
+        if (r.ok) { form.style.display = 'none'; document.getElementById('formHeader').style.display = 'none'; success.classList.add('visible'); window.scrollTo({ top: success.offsetTop - 120, behavior: 'smooth' }); }
         else { btn.disabled = false; btn.textContent = 'Send Message →'; alert('Something went wrong. Please try again or email hello@foundationalco.com directly.'); }
       }).catch(() => { btn.disabled = false; btn.textContent = 'Send Message →'; alert('Something went wrong. Please try again or email hello@foundationalco.com directly.'); });
     });

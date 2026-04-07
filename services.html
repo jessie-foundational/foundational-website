@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hyper-fractional Marketing — Foundational</title>
-  <meta name="description" content="Full-stack marketing leadership at a fraction of the cost. Strategy, execution, and LLM-powered speed for start-ups." />
+  <title>Services — Foundational</title>
+  <meta name="description" content="Hyper-fractional marketing, GTM diagnosis, and strategic consulting for start-ups. Three ways to work together." />
   <style>
 /* ============================================================
    FOUNDATIONAL — Shared Design System
@@ -131,19 +131,29 @@ p + p { margin-top: 1em; }
 }
 .nav-links a:hover { color: var(--text-light); }
 .nav-links a.active { color: var(--text-light); }
+
 /* ─── DROPDOWN NAV ─── */
 .nav-item-dropdown { position: relative; display: flex; align-items: center; }
 .nav-dropdown-toggle { display: flex !important; align-items: center; gap: 0.3rem; cursor: pointer; }
 .dropdown-arrow { font-size: 0.65rem; display: inline-block; transition: transform 0.2s; margin-top: 0.1em; }
 .nav-item-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
 .dropdown-menu {
-  position: absolute; top: calc(100% + 10px); left: 50%;
+  position: absolute; top: calc(100% + 4px); left: 50%;
   transform: translateX(-50%) translateY(-6px);
   background: var(--bg-darker); border: 1px solid var(--border-dark);
   border-radius: var(--radius-md); padding: 0.5rem; min-width: 240px;
   opacity: 0; visibility: hidden; pointer-events: none;
-  transition: opacity 0.15s 0.25s, visibility 0.15s 0.25s, transform 0.15s 0.25s;
+  transition: opacity 0.15s 0.45s, visibility 0.15s 0.45s, transform 0.15s 0.45s;
   box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+/* Invisible bridge between toggle and menu so mouse can travel down without the menu closing */
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  height: 16px;
 }
 .nav-item-dropdown:hover .dropdown-menu {
   opacity: 1; visibility: visible; pointer-events: all;
@@ -158,20 +168,6 @@ p + p { margin-top: 1em; }
 .dropdown-menu a:hover { background: var(--orange-soft); color: var(--text-light); }
 .dropdown-menu a.active { color: var(--orange); }
 .nav-dropdown-toggle.active { color: var(--text-light) !important; }
-
-/* ─── PAGINATION ─── */
-.pagination { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 3rem; }
-.page-btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  min-width: 2.5rem; height: 2.5rem; padding: 0 0.85rem;
-  border: 1px solid var(--border-light); border-radius: var(--radius-sm);
-  font-family: 'Open Sans', sans-serif; font-size: 0.875rem;
-  color: var(--text-gray); background: transparent;
-  cursor: pointer; transition: all 0.2s;
-}
-.page-btn:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-soft); }
-.page-btn.active { background: var(--orange); border-color: var(--orange); color: #fff; }
-.page-btn:disabled { opacity: 0.35; cursor: default; pointer-events: none; }
 
 .btn-nav {
   display: inline-flex;
@@ -196,6 +192,8 @@ p + p { margin-top: 1em; }
   gap: 5px;
   cursor: pointer;
   padding: 4px;
+  background: none;
+  border: none;
 }
 .nav-toggle span {
   display: block;
@@ -206,96 +204,7 @@ p + p { margin-top: 1em; }
   transition: all 0.25s;
 }
 
-/* ─── HERO (dark) ─── */
-.hero {
-  position: relative;
-  background: var(--bg-dark);
-  padding: calc(var(--nav-h) + 5rem) 0 5rem;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -80px;
-  right: -120px;
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(232,98,44,0.18) 0%, transparent 65%);
-  pointer-events: none;
-}
-.hero .container { position: relative; z-index: 1; }
-.hero-inner {
-  max-width: 700px;
-}
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.35rem 0.85rem;
-  background: var(--orange-soft);
-  color: var(--orange);
-  border-radius: var(--radius-pill);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-}
-.badge-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--orange);
-  flex-shrink: 0;
-}
-.hero h1 {
-  color: var(--text-light);
-  margin-bottom: 1.25rem;
-}
-.hero-sub {
-  font-size: 1.1rem;
-  color: var(--text-muted);
-  line-height: 1.75;
-  margin-bottom: 2.5rem;
-  max-width: 56ch;
-}
-.hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  margin-bottom: 2.5rem;
-}
-.hero-meta-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-.hero-meta-icon {
-  width: 36px;
-  height: 36px;
-  background: var(--bg-icon);
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  flex-shrink: 0;
-}
-.hero-meta-label {
-  font-size: 0.7rem;
-  color: var(--text-faint);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  line-height: 1;
-  margin-bottom: 0.2rem;
-}
-.hero-meta-value {
-  font-size: 0.875rem;
-  color: var(--text-light);
-  font-weight: 500;
-}
-
-/* Page hero (smaller, for inner pages) */
+/* ─── PAGE HERO ─── */
 .page-hero {
   background: var(--bg-dark);
   padding: calc(var(--nav-h) + 3.5rem) 0 3.5rem;
@@ -441,6 +350,80 @@ p + p { margin-top: 1em; }
 .section-light .card h3 { color: var(--text-dark); }
 .section-light .card p  { color: var(--text-gray); }
 
+/* ─── ENGAGEMENT CARDS ─── */
+.engagement-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+.engagement-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  position: relative;
+  transition: transform 0.2s, border-color 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+.engagement-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(232,98,44,0.3);
+}
+.engagement-card.featured {
+  border-color: var(--orange);
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(232,98,44,0.05) 100%);
+}
+.engagement-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: var(--orange-soft);
+  border-radius: var(--radius-pill);
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.engagement-card h3 {
+  color: var(--text-light);
+  margin-bottom: 0.75rem;
+  font-size: 1.35rem;
+}
+.engagement-card p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  max-width: none;
+  flex-grow: 1;
+}
+.engagement-meta {
+  margin-top: auto;
+  padding-top: 1.25rem !important;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-dark);
+  font-size: 0.82rem;
+  color: var(--text-faint);
+  letter-spacing: 0.04em;
+}
+.engagement-meta strong {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.engagement-cta {
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--orange);
+  transition: gap 0.2s;
+}
+.engagement-cta:hover { gap: 0.65rem; }
+
 /* ─── TWO COLUMN LAYOUT ─── */
 .two-col {
   display: grid;
@@ -448,8 +431,6 @@ p + p { margin-top: 1em; }
   gap: 5rem;
   align-items: center;
 }
-.two-col-reverse { direction: rtl; }
-.two-col-reverse > * { direction: ltr; }
 
 /* ─── FEATURE LIST ─── */
 .feature-list {
@@ -476,10 +457,38 @@ p + p { margin-top: 1em; }
   font-size: 0.75rem;
   font-weight: 700;
 }
-.section-light .feature-item h4 { color: var(--text-dark); }
-.section-light .feature-item p  { color: var(--text-gray); font-size: 0.92rem; }
-.section-dark  .feature-item h4 { color: var(--text-light); }
-.section-dark  .feature-item p  { color: var(--text-muted); font-size: 0.92rem; }
+
+/* ─── NUMBERED LIST ─── */
+.numbered-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.numbered-item {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+.numbered-badge {
+  width: 28px;
+  height: 28px;
+  background: var(--orange-soft);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--orange);
+}
+.numbered-item p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: none;
+}
 
 /* ─── DIVIDER ─── */
 .divider {
@@ -487,33 +496,6 @@ p + p { margin-top: 1em; }
   background: var(--border-dark);
   margin: 0;
 }
-.divider-light {
-  background: var(--border-light);
-}
-
-/* ─── CALLOUT / ETHICS BOX ─── */
-.callout {
-  border-left: 3px solid var(--orange);
-  padding: 1.5rem 1.75rem;
-  background: var(--orange-soft);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  margin-top: 2rem;
-}
-.callout-label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 0.6rem;
-}
-.callout p {
-  font-size: 0.92rem;
-  color: var(--text-muted);
-  max-width: none;
-  line-height: 1.7;
-}
-.section-light .callout p { color: var(--text-gray); }
 
 /* ─── CONTACT FORM SECTION ─── */
 .form-section {
@@ -584,15 +566,10 @@ p + p { margin-top: 1em; }
 
 .form-submit {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 0.5rem;
-}
-.form-privacy {
-  font-size: 0.78rem;
-  color: var(--text-gray);
-  max-width: none;
 }
 
 /* Form success state */
@@ -663,150 +640,6 @@ p + p { margin-top: 1em; }
   color: var(--text-faint);
 }
 
-/* ─── BLOG / RESOURCES CARDS ─── */
-.post-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.75rem;
-}
-.post-card {
-  background: #fff;
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.post-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(43,45,51,0.1);
-}
-.post-card-img {
-  height: 180px;
-  background: var(--bg-light-2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-gray);
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-.post-card-body { padding: 1.5rem; }
-.post-tag {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 0.5rem;
-}
-.post-card h3 {
-  color: var(--text-dark);
-  font-size: 1.05rem;
-  margin-bottom: 0.5rem;
-  line-height: 1.3;
-}
-.post-card p {
-  color: var(--text-gray);
-  font-size: 0.85rem;
-  max-width: none;
-  margin-bottom: 1rem;
-}
-.post-read-more {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--orange);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  transition: gap 0.2s;
-}
-.post-read-more:hover { gap: 0.55rem; }
-
-/* ─── EVENTS ─── */
-.event-list { display: flex; flex-direction: column; gap: 1.25rem; }
-.event-item {
-  display: flex;
-  gap: 1.5rem;
-  align-items: flex-start;
-  padding: 1.5rem;
-  background: #fff;
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  transition: transform 0.2s;
-}
-.event-item:hover { transform: translateX(4px); }
-.event-date {
-  text-align: center;
-  flex-shrink: 0;
-  background: var(--orange-soft);
-  border-radius: var(--radius-sm);
-  padding: 0.6rem 0.9rem;
-  min-width: 60px;
-}
-.event-date-month {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--orange);
-}
-.event-date-day {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.75rem;
-  color: var(--text-dark);
-  line-height: 1;
-}
-.event-info h4 { color: var(--text-dark); margin-bottom: 0.3rem; }
-.event-info p  { color: var(--text-gray); font-size: 0.88rem; max-width: none; }
-.event-type {
-  margin-top: 0.5rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--orange);
-}
-
-/* ─── INVESTOR SECTION ─── */
-.investor-logos {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-top: 2rem;
-}
-.investor-badge {
-  padding: 0.6rem 1.2rem;
-  border: 1px solid var(--border-dark);
-  border-radius: var(--radius-sm);
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  font-weight: 600;
-}
-
-/* ─── STATS ─── */
-.stats-row {
-  display: flex;
-  gap: 3rem;
-  flex-wrap: wrap;
-  margin-top: 2.5rem;
-}
-.stat-item {}
-.stat-number {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2.5rem;
-  color: var(--orange);
-  line-height: 1;
-  margin-bottom: 0.35rem;
-}
-.stat-label {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  max-width: 15ch;
-  line-height: 1.4;
-}
-
 /* ─── SECTION DIVIDERS ─── */
 .section, .form-section { border-top: 1px solid var(--border-dark); }
 .section-light, .form-section { border-top: 1px solid var(--border-light); }
@@ -816,7 +649,7 @@ p + p { margin-top: 1em; }
   .cards-3 { grid-template-columns: repeat(2, 1fr); }
   .cards-2 { grid-template-columns: 1fr; }
   .two-col { grid-template-columns: 1fr; gap: 3rem; }
-  .post-grid { grid-template-columns: repeat(2, 1fr); }
+  .engagement-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
@@ -829,14 +662,11 @@ p + p { margin-top: 1em; }
   .dropdown-menu { position: static; transform: none; opacity: 1; visibility: visible; pointer-events: all; background: transparent; border: none; box-shadow: none; padding: 0.25rem 0 0.25rem 1rem; min-width: unset; width: 100%; display: none; }
   .nav-item-dropdown.open .dropdown-menu { display: block; }
   .dropdown-menu a { padding: 0.5rem 0; font-size: 0.95rem; border-radius: 0; }
-
   .nav-toggle { display: flex; }
   .cards-3, .cards-2 { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
-  .post-grid { grid-template-columns: 1fr; }
+  .form-submit { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
-  .stats-row { gap: 2rem; }
-  .hero-meta { gap: 1.25rem; }
   .section { padding: 3.5rem 0; }
   .two-col { gap: 2.5rem; }
 }
@@ -860,7 +690,7 @@ p + p { margin-top: 1em; }
         <div class="nav-item-dropdown" id="servicesDropdown">
           <a href="services.html" class="nav-dropdown-toggle active">Services <span class="dropdown-arrow">▾</span></a>
           <div class="dropdown-menu">
-            <a href="hyper-fractional-marketing.html" class="active">Hyper-fractional Marketing</a>
+            <a href="hyper-fractional-marketing.html">Hyper-fractional Marketing</a>
             <a href="gtm-diagnosis.html">GTM Diagnosis</a>
           </div>
         </div>
@@ -879,75 +709,120 @@ p + p { margin-top: 1em; }
   <!-- PAGE HERO -->
   <section class="page-hero">
     <div class="container">
-      <div class="badge"><span class="badge-dot"></span> Services</div>
-      <h1>Hyper-fractional <em class="serif-italic">Marketing.</em></h1>
-      <p class="page-sub">Part strategist, part thought-partner, part execution — powered by 20 years of start-up experience and accelerated by LLMs. Everything a full-time marketing leader would do, at a fraction of the cost.</p>
+      <div class="badge" style="display:inline-flex; align-items:center; gap:0.45rem; padding:0.35rem 0.85rem; background:var(--orange-soft); color:var(--orange); border-radius:100px; font-size:0.75rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:1.5rem;">
+        <span style="width:6px; height:6px; border-radius:50%; background:var(--orange); flex-shrink:0;"></span> Services
+      </div>
+      <h1>Expertise that moves <em class="serif-italic">the needle.</em></h1>
+      <p class="page-sub">I help start-ups across the full spectrum of go-to-market work streams — from strategy to execution to analysis — to help you go from start-up to&nbsp;scale-up.</p>
     </div>
   </section>
 
-  <!-- WHAT IS HFM -->
+  <!-- AREAS OF FOCUS -->
   <section class="section section-light">
     <div class="container">
-      <div class="two-col">
-        <div>
-          <p class="section-label">What It Is</p>
-          <h2 style="color:var(--text-dark); margin-bottom:1.25rem;">Strategy and execution, <em style="color:var(--orange); font-style:italic;">deeply embedded.</em></h2>
-          <p style="color:var(--text-gray); margin-bottom:1em;">Hyper-fractional Marketing (HFM) isn't a retainer where you get a deck once a month. I embed directly with your team — attending standups, diving into your data, and working alongside your founders and operators on the biggest challenges your business is facing.</p>
-          <p style="color:var(--text-gray);">I then leverage curated LLM skills and templates to execute and iterate on marketing programs at a pace that a traditional agency or consultant simply can't match. It's the best of 20 years of start-up experience, accelerated.</p>
+      <div class="section-header">
+        <p class="section-label">Areas of Focus</p>
+        <h2 style="color:var(--text-dark);">Where I can&nbsp;help.</h2>
+        <p style="color:var(--text-gray); margin-top:0.75rem;">I work with start-ups across the full spectrum of go-to-market — from strategy through&nbsp;execution.</p>
+      </div>
+      <div class="cards-grid cards-3">
+
+        <div class="card">
+          <div class="card-icon">🔧</div>
+          <h3>Unstick a Stuck Sales Cycle</h3>
+          <p>If your pipeline is stalling, deals aren't closing, or your sales team is spinning its wheels — there's usually a fixable reason. Let's find&nbsp;it.</p>
         </div>
-        <div>
-          <div style="background:var(--bg-light-2); border-radius:var(--radius-md); padding:2rem;">
-            <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--orange); margin-bottom:1.25rem;">What's Included</p>
-            <div class="feature-list">
-              <div class="feature-item">
-                <div class="feature-check">✓</div>
-                <div><h4>Weekly embedded collaboration</h4><p>I join your team's rhythm — standups, strategy sessions, reviews — as a true marketing partner.</p></div>
-              </div>
-              <div class="feature-item">
-                <div class="feature-check">✓</div>
-                <div><h4>Full GTM strategy development</h4><p>Positioning, messaging, channel strategy, and campaign planning built for your specific stage and audience.</p></div>
-              </div>
-              <div class="feature-item">
-                <div class="feature-check">✓</div>
-                <div><h4>Hands-on execution</h4><p>I don't just advise — I build. From content to campaigns to lifecycle programs, I do the work alongside you.</p></div>
-              </div>
-              <div class="feature-item">
-                <div class="feature-check">✓</div>
-                <div><h4>HFM is your Go-to-Market motion, accelerated.</h4><p>Curated AI skills and templates let us move faster, test more, and iterate in real time — without adding headcount.</p></div>
-              </div>
-            </div>
-          </div>
+
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <h3>Positioning &amp; Messaging</h3>
+          <p>Frame your company for the right buyer, in the right language. Positioning is the foundation everything else is built on. Let's get you on the right track today. Not&nbsp;tomorrow.</p>
         </div>
+
+        <div class="card">
+          <div class="card-icon">🌱</div>
+          <h3>Product-Market Fit</h3>
+          <p>Getting to your first 100 customers requires a disciplined approach to identifying who buys, why they buy, and how to find more of&nbsp;them.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📈</div>
+          <h3>Marketing Strategy &amp; Execution</h3>
+          <p>From content and demand gen to channel strategy and campaign planning — I build programs that are right-sized for where you are and designed to&nbsp;scale.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🔀</div>
+          <h3>Operationalizing a Pivot</h3>
+          <p>You need to make a change, but how do you unwind and rebuild existing GTM programs? I build plans and make it a smooth transition for you, your team, and your&nbsp;customers.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>LLM-Accelerated Execution</h3>
+          <p>I leverage curated LLM skills and templates to move faster than a traditional agency or consultant — so you get more output, in less time, for less&nbsp;cost.</p>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
+  <!--HOW WE WORK TOGETHER -->
   <section class="section section-dark">
     <div class="container">
       <div class="section-header">
-        <p class="section-label">How It Works</p>
-        <h2 style="color:var(--text-light);">Built for the <em class="serif-italic">start-up pace.</em></h2>
-        <p style="color:var(--text-muted); margin-top:0.75rem;">HFM engagements are designed to flex with where you are — from a focused 6-week sprint to a deeper 6-month partnership.</p>
+        <p class="section-label">How We Work Together</p>
+        <h2>Three ways to&nbsp;engage.</h2>
+        <p style="color:var(--text-muted); margin-top:0.75rem;">Whether you need ongoing embedded support, a focused diagnostic sprint, or just a conversation — I have an engagement format to fit your&nbsp;situation.</p>
       </div>
-      <div class="cards-grid cards-3">
-        <div class="card">
-          <div class="card-icon">1</div>
-          <h3>Lightning Sprints</h3>
-          <p style="font-size:0.82rem; color:var(--orange); margin-bottom:0.5rem;">6–12 weeks</p>
-          <p>When you need to add horsepower for product launches, company and product rebrands, and events, I drop in as an experienced operator who has seen and done many high stakes, time sensitive&nbsp;events.</p>
+
+      <div class="engagement-grid">
+
+        <!-- Hyper-fractional -->
+        <div class="engagement-card featured">
+          <div class="engagement-badge">Most Popular</div>
+          <h3>Hyper-fractional Marketing</h3>
+          <p>Full-stack marketing leadership — embedded with your team — at a fraction of the cost of a full-time hire. I bring strategy, execution, and LLM-accelerated workflows to help you build the marketing foundation your start-up&nbsp;needs.</p>
+          <div class="engagement-meta"><strong>Engagements:</strong> 6 weeks to 6 months</div>
+          <a href="hyper-fractional-marketing.html" class="engagement-cta">Learn More →</a>
         </div>
-        <div class="card">
-          <div class="card-icon">2</div>
-          <h3>Resetting the Foundation</h3>
-          <p style="font-size:0.82rem; color:var(--orange); margin-bottom:0.5rem;">3–6 months</p>
-          <p>A companion service to the GTM Diagnosis, when there are big challenges to solve. In here, we find alignment for product, marketing, and sales, plan and execute for growth, and leave your team with a clear roadmap to build&nbsp;on.</p>
+
+        <!-- GTM Diagnosis -->
+        <div class="engagement-card">
+          <div class="engagement-badge">Quick Win</div>
+          <h3>GTM Diagnosis</h3>
+          <p>For when something is clearly slowing your sales cycle, but you're too busy to figure out what. A focused engagement that surfaces the problem and gives you a clear path to fix&nbsp;it.</p>
+          <div class="engagement-meta"><strong>Engagement:</strong> 1–3 weeks</div>
+          <a href="gtm-diagnosis.html" class="engagement-cta">Learn More →</a>
         </div>
-        <div class="card">
-          <div class="card-icon">3</div>
-          <h3>Growth Engine</h3>
-          <p style="font-size:0.82rem; color:var(--orange); margin-bottom:0.5rem;">6+ months</p>
-          <p>You have big goals and need to start growing today. I embed as a complete team member, bring decades of experience, and some shiny new LLM templates to execute quickly, and, when you're ready, I help you find my&nbsp;replacement.</p>
+
+        <!-- Coffee Chat -->
+        <div class="engagement-card">
+          <div class="engagement-badge">Free</div>
+          <h3>Coffee Chat</h3>
+          <p>Not sure what you need next? No problem. Grab some time to chat, and we'll talk through your best next&nbsp;steps.</p>
+          <div class="engagement-meta"><strong>Format:</strong> 30-minute call</div>
+          <a href="contact.html" class="engagement-cta">Book 30 Minutes →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!--A NOTE ON HOW I WORK -->
+  <section class="section section-dark">
+    <div class="container">
+      <p class="section-label">A Note on How I Work</p>
+      <h2 style="color:var(--text-light); margin-bottom:1.25rem;">My dual role as operator and&nbsp;investor.</h2>
+      <p style="color:var(--text-muted); font-size:1.05rem; line-height:1.8;">I wear two hats — consultant to start-ups and investor in start-ups. I love both roles; there's a lot of natural overlap between them, and I believe in being transparent about how I navigate that&nbsp;overlap.</p>
+      <div class="numbered-list" style="margin-top:2rem;">
+        <div class="numbered-item">
+          <div class="numbered-badge">1</div>
+          <p>I don't currently lead deals or invest directly. All of my investments are made through <a href="https://tbdangels.com" target="_blank" style="color:var(--orange);">TBD&nbsp;Angels</a>.</p>
+        </div>
+        <div class="numbered-item">
+          <div class="numbered-badge">2</div>
+          <p>I don't bring deals to the TBD network if I'm in any stage of considering or engaged in consulting services. If I think you're a fit for TBD, I will find another member to present you to the group for consideration — but engaging my consulting services is not an access point for the&nbsp;network.</p>
         </div>
       </div>
     </div>
@@ -958,14 +833,14 @@ p + p { margin-top: 1em; }
     <div class="container">
       <div class="form-wrap">
         <div class="section-header">
-          <p class="section-label">Ready to Start?</p>
+          <p class="section-label">Get Started</p>
           <h2>Let's talk about your start-up.</h2>
-          <p>Tell me where you are and what you're trying to accomplish. I'll follow up within a couple of business days.</p>
+          <p>Tell me a bit about where you are and what you're working on. I'll follow up within a couple of business&nbsp;days.</p>
         </div>
         <div id="formSuccess" class="form-success">
           <div class="form-success-icon">✓</div>
           <h3>Message sent!</h3>
-          <p>Thanks for reaching out. I'll be in touch shortly.</p>
+          <p>Thanks for reaching out. I'll be in touch within a couple of business days.</p>
         </div>
         <form class="contact-form" id="contactForm" action="https://formspree.io/f/maqlbkel" method="POST" novalidate>
           <div class="form-row">
@@ -991,7 +866,8 @@ p + p { margin-top: 1em; }
           <div class="form-group">
             <label>What are you interested in discussing? <span class="required">*</span></label>
             <select id="interestSelect" name="interest" required>
-              <option value="hfm" selected>Hyper-fractional Marketing</option>
+              <option value="" disabled selected>Select one...</option>
+              <option value="hfm">Hyper-fractional Marketing</option>
               <option value="gtm">GTM Diagnosis</option>
               <option value="investment">Investment</option>
               <option value="networking">Networking</option>
@@ -1007,7 +883,7 @@ p + p { margin-top: 1em; }
             <label>How did you find me?</label>
             <input type="text" name="referralSource" placeholder="LinkedIn, referral, webinar, etc." />
           </div>
-          <div class="form-submit" style="display:flex; flex-direction:row; justify-content:space-between; align-items:center;">
+          <div class="form-submit">
             <button type="submit" class="btn-primary">Send Message →</button>
             <a href="https://www.linkedin.com/in/jessica-angell-carlson-b0a395/" target="_blank" class="btn-secondary">Connect on LinkedIn →</a>
           </div>
@@ -1020,10 +896,18 @@ p + p { margin-top: 1em; }
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <div class="footer-logo"><span class="footer-logo-mark">f.</span><span>foundational</span></div>
+        <div class="footer-logo">
+          <span class="footer-logo-mark">f.</span>
+          <span>foundational</span>
+        </div>
         <div class="footer-links">
-          <a href="about.html">About Me</a><a href="services.html">Services</a><a href="investing.html">Investing</a>
-          <a href="resources.html" style="display:none">Resources</a><a href="events.html">Events</a><a href="contact.html">Contact</a>
+          <a href="about.html">About Me</a>
+          <a href="services.html">Services</a>
+          <a href="investing.html">Investing</a>
+          <a href="results.html">Results</a>
+          <a href="resources.html" style="display:none">Resources</a>
+          <a href="events.html">Events</a>
+          <a href="contact.html">Contact</a>
           <a href="https://www.linkedin.com/in/jessica-angell-carlson-b0a395/" target="_blank">LinkedIn ↗</a>
         </div>
         <div class="footer-right">© 2026 Foundational. All rights reserved.</div>
@@ -1032,13 +916,30 @@ p + p { margin-top: 1em; }
   </footer>
 
   <script>
+    // Mobile nav
     const toggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
     toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+    // Mobile dropdown toggle
+    const dropdown = document.getElementById('servicesDropdown');
+    const dropdownToggle = dropdown.querySelector('.nav-dropdown-toggle');
+    dropdownToggle.addEventListener('click', (e) => {
+      if (window.innerWidth <= 640) {
+        e.preventDefault();
+        dropdown.classList.toggle('open');
+      }
+    });
+
+    // Other field toggle
     const select = document.getElementById('interestSelect');
     const other  = document.getElementById('otherField');
-    select.addEventListener('change', () => other.classList.toggle('visible', select.value === 'other'));
-    const form = document.getElementById('contactForm');
+    select.addEventListener('change', () => {
+      other.classList.toggle('visible', select.value === 'other');
+    });
+
+    // Form submit
+    const form    = document.getElementById('contactForm');
     const success = document.getElementById('formSuccess');
     form.addEventListener('submit', e => {
       e.preventDefault();
