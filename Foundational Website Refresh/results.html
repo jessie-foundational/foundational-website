@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Results — Foundational</title>
+  <meta name="description" content="Real results from real engagements. Case studies across B2B SaaS and DTC — from ICP definition to churn reduction." />
+  <style>
+/* ============================================================
+   FOUNDATIONAL — Shared Design System
+   ============================================================ */
+
+:root {
+  --bg-dark:     #2B2D33;
+  --bg-darker:   #23252A;
+  --bg-card:     #33363D;
+  --bg-icon:     #3A3D45;
+  --bg-light:    #FAFAF8;
+  --bg-light-2:  #F2F1EE;
+
+  --orange:      #E8622C;
+  --orange-soft: rgba(232, 98, 44, 0.10);
+  --orange-dark: #C9521F;
+
+  --text-light:  #F5F5F3;
+  --text-muted:  #AAAAAA;
+  --text-faint:  rgba(255,255,255,0.35);
+  --text-dark:   #2B2D33;
+  --text-gray:   #666462;
+
+  --border-dark: rgba(255,255,255,0.09);
+  --border-light: rgba(43,45,51,0.12);
+
+  --col-challenge: #C0392B;
+  --col-solution:  #2980B9;
+  --col-results:   #27AE60;
+
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-pill: 100px;
+
+  --max-w: 1160px;
+  --nav-h: 68px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Open Sans', -apple-system, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+h1, h2, h3, h4 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.15;
+}
+h1 { font-size: clamp(2.6rem, 5vw, 3.75rem); }
+h2 { font-size: clamp(2rem, 3.5vw, 2.75rem); }
+h3 { font-size: clamp(1.3rem, 2.5vw, 1.65rem); }
+h4 { font-size: 1.15rem; }
+
+.serif-italic { font-style: italic; color: var(--orange); }
+p { max-width: 62ch; }
+p + p { margin-top: 1em; }
+
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-dark  { background: var(--bg-dark); }
+.section-light { background: var(--bg-light); }
+
+/* ─── SECTION DIVIDERS ─── */
+.section, .form-section { border-top: 1px solid var(--border-dark); }
+.section-light, .form-section { border-top: 1px solid var(--border-light); }
+
+/* ─── NAV ─── */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  background: rgba(43, 45, 51, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-dark);
+}
+.site-nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--text-light);
+  letter-spacing: 0.01em;
+}
+.nav-logo-mark {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--orange);
+  line-height: 1;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-links a {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text-light); }
+.nav-links a.active { color: var(--text-light); }
+
+.nav-item-dropdown { position: relative; display: flex; align-items: center; }
+.nav-dropdown-toggle { display: flex !important; align-items: center; gap: 0.3rem; cursor: pointer; }
+.dropdown-arrow { font-size: 0.65rem; display: inline-block; transition: transform 0.2s; margin-top: 0.1em; }
+.nav-item-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+.dropdown-menu {
+  position: absolute; top: calc(100% + 4px); left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  background: var(--bg-darker); border: 1px solid var(--border-dark);
+  border-radius: var(--radius-md); padding: 0.5rem; min-width: 240px;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.15s 0.45s, visibility 0.15s 0.45s, transform 0.15s 0.45s;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -16px; left: 0; right: 0;
+  height: 16px;
+}
+.nav-item-dropdown:hover .dropdown-menu {
+  opacity: 1; visibility: visible; pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+  transition: opacity 0.15s, visibility 0.15s, transform 0.15s;
+}
+.dropdown-menu a {
+  display: block; padding: 0.65rem 1rem; font-size: 0.85rem;
+  color: var(--text-muted); border-radius: var(--radius-sm);
+  transition: background 0.15s, color 0.15s; white-space: nowrap;
+}
+.dropdown-menu a:hover { background: var(--orange-soft); color: var(--text-light); }
+
+.btn-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.2rem;
+  background: var(--orange);
+  color: #fff !important;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.btn-nav:hover { background: var(--orange-dark); transform: translateY(-1px); }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--text-light);
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+
+/* ─── PAGE HERO ─── */
+.page-hero {
+  background: var(--bg-dark);
+  padding: calc(var(--nav-h) + 3.5rem) 0 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(232,98,44,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.page-hero .container { position: relative; z-index: 1; }
+.page-hero h1 { color: var(--text-light); margin-bottom: 1rem; }
+.page-hero .page-sub {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 58ch;
+  line-height: 1.7;
+}
+
+/* ─── BADGE ─── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  background: var(--orange-soft);
+  color: var(--orange);
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+/* ─── BUTTONS ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.75rem;
+  background: var(--orange);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  letter-spacing: 0.01em;
+}
+.btn-primary:hover {
+  background: var(--orange-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(232,98,44,0.35);
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.75rem;
+  background: transparent;
+  color: var(--text-light);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+/* ─── SECTIONS ─── */
+.section { padding: 5rem 0; }
+
+.section-header { margin-bottom: 3rem; }
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.75rem;
+}
+.section-dark .section-header h2 { color: var(--text-light); }
+.section-light .section-header h2 { color: var(--text-dark); }
+.section-dark .section-header p  { color: var(--text-muted); }
+.section-light .section-header p  { color: var(--text-gray); }
+
+/* ─── CASE STUDY CARDS ─── */
+.case-studies {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.case-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(43,45,51,0.10);
+}
+
+/* Black header for max contrast */
+.case-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 2rem;
+  background: #0E0F11;
+}
+
+.case-client {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.case-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--orange);
+  border-radius: var(--radius-pill);
+  padding: 0.3rem 0.85rem;
+  flex-shrink: 0;
+}
+
+.case-client-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.03em;
+}
+
+.case-focus {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.case-focus span {
+  color: rgba(255,255,255,0.7);
+}
+
+.case-card-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Colored column accents */
+.case-col {
+  padding: 2rem;
+  border-right: 1px solid var(--border-light);
+  border-top: 3px solid transparent;
+}
+.case-col:last-child { border-right: none; }
+.case-col.challenge { border-top-color: var(--col-challenge); background: rgba(192,57,43,0.03); }
+.case-col.solution  { border-top-color: var(--col-solution);  background: rgba(41,128,185,0.03); }
+.case-col.results   { border-top-color: var(--col-results);   background: rgba(39,174,96,0.03); }
+
+.case-col-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.case-col-label.challenge { color: var(--col-challenge); }
+.case-col-label.solution  { color: var(--col-solution); }
+.case-col-label.results   { color: var(--col-results); }
+
+.case-col-icon {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+.challenge .case-col-icon { background: rgba(192,57,43,0.12); }
+.solution  .case-col-icon { background: rgba(41,128,185,0.12); }
+.results   .case-col-icon { background: rgba(39,174,96,0.12); }
+
+.case-col p {
+  color: var(--text-gray);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  max-width: none;
+}
+
+.result-stat {
+  display: block;
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.5rem;
+  color: var(--col-results);
+  line-height: 1.2;
+  margin-bottom: 0.65rem;
+  font-weight: 400;
+}
+
+.result-title {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.6rem;
+}
+
+/* ─── WHAT I BRING STRIP ─── */
+.bring-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  background: #0E0F11;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.bring-block {
+  padding: 2.5rem 2rem;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.bring-block:last-child { border-right: none; }
+.bring-icon {
+  font-size: 1.75rem;
+  margin-bottom: 0.85rem;
+  line-height: 1;
+}
+.bring-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.1rem;
+  color: var(--text-light);
+  line-height: 1.25;
+}
+
+/* ─── CONTACT FORM ─── */
+.form-section {
+  background: var(--bg-light);
+  padding: 5rem 0;
+}
+.form-wrap { max-width: 640px; margin: 0 auto; }
+.form-section .section-header { text-align: center; margin-bottom: 2.5rem; }
+.form-section .section-header h2 { color: var(--text-dark); }
+.form-section .section-header p  { color: var(--text-gray); margin: 0.75rem auto 0; }
+
+.contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.45rem; }
+.form-group label { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em; color: var(--text-dark); }
+.form-group label .required { color: var(--orange); margin-left: 2px; }
+.form-group input, .form-group select, .form-group textarea {
+  padding: 0.7rem 1rem;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.92rem;
+  color: var(--text-dark);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  width: 100%;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(232,98,44,0.12);
+}
+.form-group input::placeholder, .form-group textarea::placeholder { color: #b0ada9; }
+.form-group select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23AAAAAA' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+.form-group textarea { resize: vertical; min-height: 100px; }
+.other-field { display: none; }
+.other-field.visible { display: flex; }
+
+.form-submit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #fff;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+.form-success.visible { display: block; }
+.form-success-icon {
+  width: 56px; height: 56px;
+  background: var(--orange-soft);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 1.25rem;
+}
+.form-success h3 { color: var(--text-dark); margin-bottom: 0.5rem; }
+.form-success p  { color: var(--text-gray); font-size: 0.92rem; margin: 0 auto; }
+
+/* ─── FOOTER ─── */
+.site-footer {
+  background: var(--bg-darker);
+  border-top: 1px solid var(--border-dark);
+  padding: 2.5rem 0;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.footer-logo { display: flex; align-items: center; gap: 0.35rem; font-size: 0.95rem; color: var(--text-muted); }
+.footer-logo-mark { font-family: 'DM Serif Display', Georgia, serif; font-style: italic; font-size: 1.15rem; color: var(--orange); line-height: 1; }
+.footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.footer-links a { font-size: 0.82rem; color: var(--text-faint); transition: color 0.2s; }
+.footer-links a:hover { color: var(--text-muted); }
+.footer-right { font-size: 0.78rem; color: var(--text-faint); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .case-card-body { grid-template-columns: 1fr; }
+  .case-col { border-right: none; border-bottom: 1px solid var(--border-light); border-top: none; border-left: 3px solid transparent; }
+  .case-col:last-child { border-bottom: none; }
+  .case-col.challenge { border-left-color: var(--col-challenge); }
+  .case-col.solution  { border-left-color: var(--col-solution); }
+  .case-col.results   { border-left-color: var(--col-results); }
+  .bring-strip { grid-template-columns: 1fr; }
+  .bring-block { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .bring-block:last-child { border-bottom: none; }
+  .case-focus { display: none; }
+}
+
+@media (max-width: 640px) {
+  :root { --nav-h: 60px; }
+  .nav-links { display: none; gap: 1.25rem; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--bg-dark); padding: 1.5rem 2rem 2rem; border-bottom: 1px solid var(--border-dark); }
+  .nav-links.open { display: flex; }
+  .nav-links a { font-size: 1rem; }
+  .nav-item-dropdown { flex-direction: column; align-items: flex-start; width: 100%; }
+  .nav-dropdown-toggle { width: 100%; justify-content: space-between; }
+  .dropdown-menu { position: static; transform: none; opacity: 1; visibility: visible; pointer-events: all; background: transparent; border: none; box-shadow: none; padding: 0.25rem 0 0.25rem 1rem; min-width: unset; width: 100%; display: none; }
+  .nav-item-dropdown.open .dropdown-menu { display: block; }
+  .dropdown-menu a { padding: 0.5rem 0; font-size: 0.95rem; border-radius: 0; }
+  .nav-toggle { display: flex; }
+  .form-row { grid-template-columns: 1fr; }
+  .form-submit { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .section { padding: 3.5rem 0; }
+  .case-card-header { padding: 1.25rem 1.5rem; flex-wrap: wrap; }
+  .case-col { padding: 1.5rem; }
+}
+
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <span class="nav-logo-mark">f.</span>
+        <span>foundational</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="about.html">About Me</a>
+        <div class="nav-item-dropdown" id="servicesDropdown">
+          <a href="services.html" class="nav-dropdown-toggle">Services <span class="dropdown-arrow">▾</span></a>
+          <div class="dropdown-menu">
+            <a href="hyper-fractional-marketing.html">Hyper-fractional Marketing</a>
+            <a href="gtm-diagnosis.html">GTM Diagnosis</a>
+          </div>
+        </div>
+        <a href="investing.html">Investing</a>
+        <a href="results.html" class="active">Results</a>
+        <a href="resources.html" style="display:none">Resources</a>
+        <a href="events.html">Events</a>
+        <a href="contact.html" class="btn-nav">Get in Touch →</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="badge"><span class="badge-dot"></span> Results</div>
+      <h1>Insights that <em class="serif-italic">drive results.</em></h1>
+      <p class="page-sub">GTM success and challenges are the result of product, sales, marketing, and operations working together. I conduct complete company analysis to develop a comprehensive, actionable plan that&nbsp;works.</p>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section class="section section-light">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Case Studies</p>
+        <h2 style="color:var(--text-dark);">Real problems. Real&nbsp;solutions.</h2>
+        <p style="color:var(--text-gray); margin-top:0.75rem;">I find the opportunities to accelerate sales and develop actionable plans to unlock&nbsp;growth.</p>
+      </div>
+
+      <div class="case-studies">
+
+        <!-- ── Case Study 1: B2B SaaS / ICP & ABM ── -->
+        <div class="case-card">
+          <div class="case-card-header">
+            <div class="case-client">
+              <span class="case-tag">B2B SaaS</span>
+              <span class="case-client-label">Client: B2B SaaS</span>
+            </div>
+            <div class="case-focus">Focus: <span>ICP Definition &amp; ABM Strategy</span></div>
+          </div>
+          <div class="case-card-body">
+            <div class="case-col challenge">
+              <div class="case-col-label challenge">
+                <div class="case-col-icon">🔍</div>
+                Challenge
+              </div>
+              <p>Client had a big opportunity in a broad sector, but had yet to define a Minimum Viable Segment (MVS). This resulted in low outbound response rates, stalled deals, and a sluggish&nbsp;pipeline.</p>
+            </div>
+            <div class="case-col solution">
+              <div class="case-col-label solution">
+                <div class="case-col-icon">🔧</div>
+                Solution
+              </div>
+              <p>Investigated and defined the MVS to create a crisp, nuanced ICP. Worked with sales to implement an ABM strategy and messaging framework that directly addressed MVS&nbsp;needs.</p>
+            </div>
+            <div class="case-col results">
+              <div class="case-col-label results">
+                <div class="case-col-icon">📈</div>
+                Results
+              </div>
+              <span class="result-stat">4× meetings booked</span>
+              <p>Outbound response rates and meetings booked increased dramatically. Sales team reported much more productive meetings and pipeline&nbsp;movement.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Case Study 2: DTC / GTM after pivot ── -->
+        <div class="case-card">
+          <div class="case-card-header">
+            <div class="case-client">
+              <span class="case-tag">DTC</span>
+              <span class="case-client-label">Client: DTC e-commerce</span>
+            </div>
+            <div class="case-focus">Focus: <span>Post-Pivot GTM Strategy</span></div>
+          </div>
+          <div class="case-card-body">
+            <div class="case-col challenge">
+              <div class="case-col-label challenge">
+                <div class="case-col-icon">🔍</div>
+                Challenge
+              </div>
+              <p>Declining sales, high churn, and an unclear roadmap followed a strategic pivot that had changed the product, but not the GTM&nbsp;strategy.</p>
+            </div>
+            <div class="case-col solution">
+              <div class="case-col-label solution">
+                <div class="case-col-icon">🔧</div>
+                Solution
+              </div>
+              <p>Assessed current marketing strategy and completed a full funnel and website analysis. Delivered an updated marketing strategy that included tailored messaging and updated channel mix that activated all stages of the customer&nbsp;funnel.</p>
+            </div>
+            <div class="case-col results">
+              <div class="case-col-label results">
+                <div class="case-col-icon">📈</div>
+                Results
+              </div>
+              <span class="result-title">Exceeded goals across the board.</span>
+              <p>Exceeded goals across all stages of the customer&nbsp;funnel.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Case Study 3: B2B SaaS / Churn & Onboarding ── -->
+        <div class="case-card">
+          <div class="case-card-header">
+            <div class="case-client">
+              <span class="case-tag">B2B SaaS</span>
+              <span class="case-client-label">Client: B2B SaaS</span>
+            </div>
+            <div class="case-focus">Focus: <span>Churn Reduction &amp; Onboarding Redesign</span></div>
+          </div>
+          <div class="case-card-body">
+            <div class="case-col challenge">
+              <div class="case-col-label challenge">
+                <div class="case-col-icon">🔍</div>
+                Challenge
+              </div>
+              <p>My client was experiencing new, unexpected, and unexplained churn. Formal exit interviews with decision-makers weren't surfacing actionable problems to&nbsp;address.</p>
+            </div>
+            <div class="case-col solution">
+              <div class="case-col-label solution">
+                <div class="case-col-icon">🔧</div>
+                Solution
+              </div>
+              <p>A customer interview and discovery initiative focused on the user — not the buyer or decision-maker — surfaced a consistent issue with users' onboarding experience that the exit interviews&nbsp;missed.</p>
+            </div>
+            <div class="case-col results">
+              <div class="case-col-label results">
+                <div class="case-col-icon">📈</div>
+                Results
+              </div>
+              <span class="result-title">Identified cause of churn.</span>
+              <p>Presented an action plan that addressed users' challenges with onboarding. Drafted and socialized a revamped onboarding plan, trained the trainers on the most pressing client needs, and stemmed churn before it&nbsp;started.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="form-section">
+    <div class="container">
+      <div class="form-wrap">
+        <div class="section-header">
+          <p class="section-label">Get Started</p>
+          <h2>See results like these.</h2>
+          <p>Tell me a bit about your situation and what you're working on. I'll follow up within a couple of business&nbsp;days.</p>
+        </div>
+        <div id="formSuccess" class="form-success">
+          <div class="form-success-icon">✓</div>
+          <h3>Message sent!</h3>
+          <p>Thanks for reaching out. I'll be in touch within a couple of business days.</p>
+        </div>
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/maqlbkel" method="POST" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name <span class="required">*</span></label>
+              <input type="text" name="firstName" placeholder="First name" required />
+            </div>
+            <div class="form-group">
+              <label>Last Name <span class="required">*</span></label>
+              <input type="text" name="lastName" placeholder="Last name" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Company <span class="required">*</span></label>
+              <input type="text" name="company" placeholder="Your company" required />
+            </div>
+            <div class="form-group">
+              <label>Email Address <span class="required">*</span></label>
+              <input type="email" name="email" placeholder="you@company.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>What are you interested in discussing? <span class="required">*</span></label>
+            <select id="interestSelect" name="interest" required>
+              <option value="" disabled selected>Select one...</option>
+              <option value="hfm">Hyper-fractional Marketing</option>
+              <option value="gtm">GTM Diagnosis</option>
+              <option value="investment">Investment</option>
+              <option value="networking">Networking</option>
+              <option value="speaking">Speaking</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group other-field" id="otherField">
+            <label>Tell me more</label>
+            <textarea name="details" placeholder="What's on your mind?"></textarea>
+          </div>
+          <div class="form-group">
+            <label>How did you find me?</label>
+            <input type="text" name="referralSource" placeholder="LinkedIn, referral, webinar, etc." />
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn-primary">Send Message →</button>
+            <a href="https://www.linkedin.com/in/jessica-angell-carlson-b0a395/" target="_blank" class="btn-secondary">Connect on LinkedIn →</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <span class="footer-logo-mark">f.</span>
+          <span>foundational</span>
+        </div>
+        <div class="footer-links">
+          <a href="about.html">About Me</a>
+          <a href="services.html">Services</a>
+          <a href="investing.html">Investing</a>
+          <a href="results.html">Results</a>
+          <a href="resources.html" style="display:none">Resources</a>
+          <a href="events.html">Events</a>
+          <a href="contact.html">Contact</a>
+          <a href="https://www.linkedin.com/in/jessica-angell-carlson-b0a395/" target="_blank">LinkedIn ↗</a>
+        </div>
+        <div class="footer-right">© 2026 Foundational. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+    const dropdown = document.getElementById('servicesDropdown');
+    const dropdownToggle = dropdown.querySelector('.nav-dropdown-toggle');
+    dropdownToggle.addEventListener('click', (e) => {
+      if (window.innerWidth <= 640) {
+        e.preventDefault();
+        dropdown.classList.toggle('open');
+      }
+    });
+
+    const select = document.getElementById('interestSelect');
+    const other  = document.getElementById('otherField');
+    select.addEventListener('change', () => {
+      other.classList.toggle('visible', select.value === 'other');
+    });
+
+    const form    = document.getElementById('contactForm');
+    const success = document.getElementById('formSuccess');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true; btn.textContent = 'Sending...';
+      fetch('https://formspree.io/f/maqlbkel', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(r => {
+        if (r.ok) { form.style.display = 'none'; success.classList.add('visible'); window.scrollTo({ top: success.offsetTop - 120, behavior: 'smooth' }); }
+        else { btn.disabled = false; btn.textContent = 'Send Message →'; alert('Something went wrong. Please try again or email hello@foundationalco.com directly.'); }
+      }).catch(() => { btn.disabled = false; btn.textContent = 'Send Message →'; alert('Something went wrong. Please try again or email hello@foundationalco.com directly.'); });
+    });
+  </script>
+</body>
+</html>
