@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events — Foundational</title>
+  <meta name="description" content="Webinars, workshops, and speaking events on GTM strategy, marketing, and growth." />
+  <style>
+/* ============================================================
+   FOUNDATIONAL — Shared Design System
+   Based on webinar landing page design
+   ============================================================ */
+
+
+/* ─── Custom Properties ─── */
+:root {
+  --bg-dark:     #2B2D33;
+  --bg-darker:   #23252A;
+  --bg-card:     #33363D;
+  --bg-icon:     #3A3D45;
+  --bg-light:    #FAFAF8;
+  --bg-light-2:  #F2F1EE;
+
+  --orange:      #E8622C;
+  --orange-soft: rgba(232, 98, 44, 0.10);
+  --orange-dark: #C9521F;
+
+  --text-light:  #F5F5F3;
+  --text-muted:  #AAAAAA;
+  --text-faint:  rgba(255,255,255,0.35);
+  --text-dark:   #2B2D33;
+  --text-gray:   #666462;
+
+  --border-dark: rgba(255,255,255,0.09);
+  --border-light: rgba(43,45,51,0.12);
+
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-pill: 100px;
+
+  --max-w: 1160px;
+  --nav-h: 68px;
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Open Sans', -apple-system, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* ─── Typography ─── */
+h1, h2, h3, h4 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.15;
+}
+h1 { font-size: clamp(2.6rem, 5vw, 3.75rem); }
+h2 { font-size: clamp(2rem, 3.5vw, 2.75rem); }
+h3 { font-size: clamp(1.3rem, 2.5vw, 1.65rem); }
+h4 { font-size: 1.15rem; }
+
+.serif-italic { font-style: italic; color: var(--orange); }
+
+p { max-width: 62ch; }
+p + p { margin-top: 1em; }
+
+/* ─── Layout ─── */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-dark  { background: var(--bg-dark); }
+.section-light { background: var(--bg-light); }
+
+/* ─── NAV ─── */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  background: rgba(43, 45, 51, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-dark);
+}
+.site-nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--text-light);
+  letter-spacing: 0.01em;
+}
+.nav-logo-mark {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--orange);
+  line-height: 1;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-links a {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text-light); }
+.nav-links a.active { color: var(--text-light); }
+/* ─── DROPDOWN NAV ─── */
+.nav-item-dropdown { position: relative; display: flex; align-items: center; }
+.nav-dropdown-toggle { display: flex !important; align-items: center; gap: 0.3rem; cursor: pointer; }
+.dropdown-arrow { font-size: 0.65rem; display: inline-block; transition: transform 0.2s; margin-top: 0.1em; }
+.nav-item-dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+.dropdown-menu {
+  position: absolute; top: calc(100% + 10px); left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  background: var(--bg-darker); border: 1px solid var(--border-dark);
+  border-radius: var(--radius-md); padding: 0.5rem; min-width: 240px;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.15s 0.25s, visibility 0.15s 0.25s, transform 0.15s 0.25s;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+.nav-item-dropdown:hover .dropdown-menu {
+  opacity: 1; visibility: visible; pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+  transition: opacity 0.15s, visibility 0.15s, transform 0.15s;
+}
+.dropdown-menu a {
+  display: block; padding: 0.65rem 1rem; font-size: 0.85rem;
+  color: var(--text-muted); border-radius: var(--radius-sm);
+  transition: background 0.15s, color 0.15s; white-space: nowrap;
+}
+.dropdown-menu a:hover { background: var(--orange-soft); color: var(--text-light); }
+.dropdown-menu a.active { color: var(--orange); }
+.nav-dropdown-toggle.active { color: var(--text-light) !important; }
+
+/* ─── PAGINATION ─── */
+.pagination { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 3rem; }
+.page-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 2.5rem; height: 2.5rem; padding: 0 0.85rem;
+  border: 1px solid var(--border-light); border-radius: var(--radius-sm);
+  font-family: 'Open Sans', sans-serif; font-size: 0.875rem;
+  color: var(--text-gray); background: transparent;
+  cursor: pointer; transition: all 0.2s;
+}
+.page-btn:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-soft); }
+.page-btn.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+.page-btn:disabled { opacity: 0.35; cursor: default; pointer-events: none; }
+
+.btn-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.2rem;
+  background: var(--orange);
+  color: #fff !important;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.btn-nav:hover { background: var(--orange-dark); transform: translateY(-1px); }
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-light);
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+
+/* ─── HERO (dark) ─── */
+.hero {
+  position: relative;
+  background: var(--bg-dark);
+  padding: calc(var(--nav-h) + 5rem) 0 5rem;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -120px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(232,98,44,0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero .container { position: relative; z-index: 1; }
+.hero-inner {
+  max-width: 700px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  background: var(--orange-soft);
+  color: var(--orange);
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+.hero h1 {
+  color: var(--text-light);
+  margin-bottom: 1.25rem;
+}
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+  max-width: 56ch;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+.hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.hero-meta-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--bg-icon);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.hero-meta-label {
+  font-size: 0.7rem;
+  color: var(--text-faint);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.hero-meta-value {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+/* Page hero (smaller, for inner pages) */
+.page-hero {
+  background: var(--bg-dark);
+  padding: calc(var(--nav-h) + 3.5rem) 0 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(232,98,44,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.page-hero .container { position: relative; z-index: 1; }
+.page-hero h1 { color: var(--text-light); margin-bottom: 1rem; }
+.page-hero .page-sub {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 52ch;
+  line-height: 1.7;
+}
+
+/* ─── BUTTONS ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.75rem;
+  background: var(--orange);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  letter-spacing: 0.01em;
+}
+.btn-primary:hover {
+  background: var(--orange-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(232,98,44,0.35);
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.75rem;
+  background: transparent;
+  color: var(--text-light);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-secondary:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+/* ─── SECTIONS ─── */
+.section {
+  padding: 5rem 0;
+}
+.section-sm {
+  padding: 3.5rem 0;
+}
+
+/* Section header pattern */
+.section-header {
+  margin-bottom: 3rem;
+}
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.75rem;
+}
+.section-light .section-label { color: var(--orange); }
+.section-dark .section-header h2 { color: var(--text-light); }
+.section-light .section-header h2 { color: var(--text-dark); }
+.section-dark .section-header p  { color: var(--text-muted); }
+.section-light .section-header p  { color: var(--text-gray); }
+
+/* ─── CARDS ─── */
+.cards-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+.cards-2 { grid-template-columns: repeat(2, 1fr); }
+.cards-3 { grid-template-columns: repeat(3, 1fr); }
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(232,98,44,0.3);
+}
+.card-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--orange-soft);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 1.25rem;
+}
+.card h3 { color: var(--text-light); margin-bottom: 0.6rem; font-size: 1.2rem; }
+.card p  { color: var(--text-muted); font-size: 0.92rem; line-height: 1.65; max-width: none; }
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--orange);
+  transition: gap 0.2s;
+}
+.card-link:hover { gap: 0.65rem; }
+
+/* Light section cards */
+.section-light .card {
+  background: #fff;
+  border-color: var(--border-light);
+}
+.section-light .card h3 { color: var(--text-dark); }
+.section-light .card p  { color: var(--text-gray); }
+
+/* ─── TWO COLUMN LAYOUT ─── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.two-col-reverse { direction: rtl; }
+.two-col-reverse > * { direction: ltr; }
+
+/* ─── FEATURE LIST ─── */
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.feature-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.feature-check {
+  width: 22px;
+  height: 22px;
+  background: var(--orange-soft);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  color: var(--orange);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.section-light .feature-item h4 { color: var(--text-dark); }
+.section-light .feature-item p  { color: var(--text-gray); font-size: 0.92rem; }
+.section-dark  .feature-item h4 { color: var(--text-light); }
+.section-dark  .feature-item p  { color: var(--text-muted); font-size: 0.92rem; }
+
+/* ─── DIVIDER ─── */
+.divider {
+  height: 1px;
+  background: var(--border-dark);
+  margin: 0;
+}
+.divider-light {
+  background: var(--border-light);
+}
+
+/* ─── CALLOUT / ETHICS BOX ─── */
+.callout {
+  border-left: 3px solid var(--orange);
+  padding: 1.5rem 1.75rem;
+  background: var(--orange-soft);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-top: 2rem;
+}
+.callout-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.6rem;
+}
+.callout p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  max-width: none;
+  line-height: 1.7;
+}
+.section-light .callout p { color: var(--text-gray); }
+
+/* ─── CONTACT FORM SECTION ─── */
+.form-section {
+  background: var(--bg-light);
+  padding: 5rem 0;
+}
+.form-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.form-section .section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.form-section .section-header h2 { color: var(--text-dark); }
+.form-section .section-header p  { color: var(--text-gray); margin: 0.75rem auto 0; }
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.form-group label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-dark);
+}
+.form-group label .required { color: var(--orange); margin-left: 2px; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.7rem 1rem;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.92rem;
+  color: var(--text-dark);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  width: 100%;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(232,98,44,0.12);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #b0ada9;
+}
+.form-group select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23AAAAAA' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+.form-group textarea { resize: vertical; min-height: 100px; }
+.other-field { display: none; }
+.other-field.visible { display: flex; }
+
+.form-submit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-top: 0.5rem;
+}
+.form-privacy {
+  font-size: 0.78rem;
+  color: var(--text-gray);
+  max-width: none;
+}
+
+/* Form success state */
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #fff;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+.form-success.visible { display: block; }
+.form-success-icon {
+  width: 56px;
+  height: 56px;
+  background: #E8F8F0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 1.25rem;
+  color: #27AE60;
+}
+.form-success h3 { color: var(--text-dark); margin-bottom: 0.5rem; }
+.form-success p  { color: var(--text-gray); font-size: 0.92rem; margin: 0 auto; }
+
+/* ─── FOOTER ─── */
+.site-footer {
+  background: var(--bg-darker);
+  border-top: 1px solid var(--border-dark);
+  padding: 2.5rem 0;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+.footer-logo-mark {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--orange);
+  line-height: 1;
+}
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.footer-links a {
+  font-size: 0.82rem;
+  color: var(--text-faint);
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--text-muted); }
+.footer-right {
+  font-size: 0.78rem;
+  color: var(--text-faint);
+}
+
+/* ─── BLOG / RESOURCES CARDS ─── */
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+.post-card {
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.post-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(43,45,51,0.1);
+}
+.post-card-img {
+  height: 180px;
+  background: var(--bg-light-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-gray);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.post-card-body { padding: 1.5rem; }
+.post-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.5rem;
+}
+.post-card h3 {
+  color: var(--text-dark);
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.post-card p {
+  color: var(--text-gray);
+  font-size: 0.85rem;
+  max-width: none;
+  margin-bottom: 1rem;
+}
+.post-read-more {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--orange);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: gap 0.2s;
+}
+.post-read-more:hover { gap: 0.55rem; }
+
+/* ─── EVENTS ─── */
+.event-list { display: flex; flex-direction: column; gap: 1.25rem; }
+.event-item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  transition: transform 0.2s;
+}
+.event-item:hover { transform: translateX(4px); }
+.event-date {
+  text-align: center;
+  flex-shrink: 0;
+  background: var(--orange-soft);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.9rem;
+  min-width: 60px;
+}
+.event-date-month {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.event-date-day {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.75rem;
+  color: var(--text-dark);
+  line-height: 1;
+}
+.event-info h4 { color: var(--text-dark); margin-bottom: 0.3rem; }
+.event-info p  { color: var(--text-gray); font-size: 0.88rem; max-width: none; }
+.event-type {
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+/* ─── INVESTOR SECTION ─── */
+.investor-logos {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 2rem;
+}
+.investor-badge {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ─── STATS ─── */
+.stats-row {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+}
+.stat-item {}
+.stat-number {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem;
+  color: var(--orange);
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+.stat-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  max-width: 15ch;
+  line-height: 1.4;
+}
+
+/* ─── SECTION DIVIDERS ─── */
+.section, .form-section { border-top: 1px solid var(--border-dark); }
+.section-light, .form-section { border-top: 1px solid var(--border-light); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .cards-3 { grid-template-columns: repeat(2, 1fr); }
+  .cards-2 { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; gap: 3rem; }
+  .post-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  :root { --nav-h: 60px; }
+  .nav-links { display: none; gap: 1.25rem; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--bg-dark); padding: 1.5rem 2rem 2rem; border-bottom: 1px solid var(--border-dark); }
+  .nav-links.open { display: flex; }
+  .nav-links a { font-size: 1rem; }
+  .nav-item-dropdown { flex-direction: column; align-items: flex-start; width: 100%; }
+  .nav-dropdown-toggle { width: 100%; justify-content: space-between; }
+  .dropdown-menu { position: static; transform: none; opacity: 1; visibility: visible; pointer-events: all; background: transparent; border: none; box-shadow: none; padding: 0.25rem 0 0.25rem 1rem; min-width: unset; width: 100%; display: none; }
+  .nav-item-dropdown.open .dropdown-menu { display: block; }
+  .dropdown-menu a { padding: 0.5rem 0; font-size: 0.95rem; border-radius: 0; }
+
+  .nav-toggle { display: flex; }
+  .cards-3, .cards-2 { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .post-grid { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .stats-row { gap: 2rem; }
+  .hero-meta { gap: 1.25rem; }
+  .section { padding: 3.5rem 0; }
+  .two-col { gap: 2.5rem; }
+}
+
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <div class="container">
+      <a href="index.html" class="nav-logo"><span class="nav-logo-mark">f.</span><span>foundational</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="about.html">About Me</a>
+        <div class="nav-item-dropdown" id="servicesDropdown">
+          <a href="services.html" class="nav-dropdown-toggle">Services <span class="dropdown-arrow">▾</span></a>
+          <div class="dropdown-menu">
+            <a href="hyper-fractional-marketing.html">Hyper-fractional Marketing</a>
+            <a href="gtm-diagnosis.html">GTM Diagnosis</a>
+          </div>
+        </div>
+        <a href="investing.html">Investing</a>
+        <a href="results.html">Results</a>
+        <a href="resources.html" style="display:none">Resources</a>
+        <a href="events.html" class="active">Events</a>
+        <a href="contact.html" class="btn-nav">Get in Touch →</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="badge"><span class="badge-dot"></span> Events</div>
+      <h1>Let's <em class="serif-italic">meet.</em></h1>
+      <p class="page-sub">I'm based in Boston, regularly attend start-up events, host virtual webinars and workshops, and am always keen to meet founders and&nbsp;investors.</p>
+    </div>
+  </section>
+
+  <!-- UPCOMING EVENTS -->
+  <section class="section section-light">
+    <div class="container">
+      <div class="section-header">
+        <h2 style="color:var(--text-dark);">What's coming up.</h2>
+      </div>
+      <div class="event-list">
+        <div class="event-item">
+          <div class="event-date">
+            <div class="event-date-month">APR</div>
+            <div class="event-date-day">8</div>
+          </div>
+          <div class="event-info">
+            <h4>IRL x Via AI</h4>
+            <p>A recurring, in-person gathering for Boston-based GTM executives. Curated senior leaders from across the Boston tech ecosystem for real conversation over wine and light&nbsp;bites.</p>
+            <div class="event-type"><span style="color:var(--text-gray);">📍 Attending</span> · 3:00–5:30 PM</div>
+          </div>
+          <a href="https://luma.com/event/evt-kTiH8yV6GT9U7Hp" target="_blank" class="btn-secondary" style="flex-shrink:0; align-self:center; white-space:nowrap;">Details →</a>
+        </div>
+        <div class="event-item">
+          <div class="event-date">
+            <div class="event-date-month">APR</div>
+            <div class="event-date-day">14</div>
+          </div>
+          <div class="event-info">
+            <h4>UpLevel Lunch: Women Founders &amp; Investors Moving the&nbsp;Needle</h4>
+            <p>Connect, support, and inspire one another. A curated lunch for women founders and investors making things&nbsp;happen.</p>
+            <div class="event-type"><span style="color:var(--text-gray);">📍 Attending</span> · 12:00–1:30 PM</div>
+          </div>
+          <a href="#" class="btn-secondary" style="flex-shrink:0; align-self:center; white-space:nowrap;">Details →</a>
+        </div>
+        <div class="event-item" style="border-left:3px solid var(--orange); padding-left:1.5rem;">
+          <div class="event-date">
+            <div class="event-date-month">APR</div>
+            <div class="event-date-day">23</div>
+          </div>
+          <div class="event-info">
+            <h4>Build a Beautiful GTM Motion with Claude</h4>
+            <p>A hands-on webinar for founders going from 0 to 100 customers. Learn how to use Claude to build a complete GTM motion — from competitive analysis to campaign&nbsp;planning.</p>
+            <div class="event-type"><span style="color:var(--orange); font-weight:600;">🎤 Hosting</span> · Live Webinar · 2:00 PM EST</div>
+          </div>
+          <a href="https://foundationalco.com/claude-webinar" class="btn-primary" style="flex-shrink:0; align-self:center; white-space:nowrap;">Register Free →</a>
+        </div>
+        <div class="event-item" style="border-left:3px solid var(--orange); padding-left:1.5rem;">
+          <div class="event-date">
+            <div class="event-date-month">MAY</div>
+            <div class="event-date-day">28</div>
+          </div>
+          <div class="event-info">
+            <h4>TBD Angels @ Boston Tech Week 2026 — #BOSTechWeek</h4>
+            <p>Join <a href="https://tbdangels.com" target="_blank" style="color:var(--orange);">TBD Angels</a> for an evening celebrating Boston's vibrant start-up community during Boston Tech&nbsp;Week.</p>
+            <div class="event-type"><span style="color:var(--orange); font-weight:600;">🎤 Hosting</span> · Orrick, 222 Berkeley St, Boston · 4:00 PM</div>
+          </div>
+          <a href="https://partiful.com/e/tpDpzv8okndu6S4eKRir" target="_blank" class="btn-primary" style="flex-shrink:0; align-self:center; white-space:nowrap;">RSVP →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAST EVENTS -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Past Events</p>
+        <h2 style="color:var(--text-light);">Where I've <em class="serif-italic">been.</em></h2>
+      </div>
+      <div class="event-list" style="border-color:var(--border-dark);">
+        <div class="event-item" style="border-color:var(--border-dark);">
+          <div class="event-date">
+            <div class="event-date-month">MAR</div>
+            <div class="event-date-day">27</div>
+          </div>
+          <div class="event-info">
+            <h4 style="color:var(--text-dark);">Startup Boston Dealflow Mixer</h4>
+            <p style="color:var(--text-gray);">Curated 1:1 matches connecting pre-seed and seed-stage founders with investors. Hosted by Startup Boston + City of&nbsp;Boston.</p>
+            <div class="event-type" style="color:var(--text-faint);">📍 Attended · Civic Pavilion, Boston</div>
+          </div>
+        </div>
+        <div class="event-item" style="border-color:var(--border-dark);">
+          <div class="event-date">
+            <div class="event-date-month">MAR</div>
+            <div class="event-date-day">19</div>
+          </div>
+          <div class="event-info">
+            <h4 style="color:var(--text-dark);">AI Side Hustle Night: Build with Lovable at Klaviyo</h4>
+            <p style="color:var(--text-gray);">Hands-on build night where founders and entrepreneurs used AI to turn ideas into working products in a single&nbsp;evening.</p>
+            <div class="event-type" style="color:var(--text-faint);">📍 Attended · Klaviyo, Boston</div>
+          </div>
+        </div>
+        <div class="event-item" style="border-color:var(--border-dark);">
+          <div class="event-date">
+            <div class="event-date-month">MAR</div>
+            <div class="event-date-day">4</div>
+          </div>
+          <div class="event-info">
+            <h4 style="color:var(--text-dark);">She Builds Boston: Brewing Bold Ideas</h4>
+            <p style="color:var(--text-gray);">A Startup Boston coffee mixer for female founders and investors to connect, collaborate, and start the day with conversations that&nbsp;energize.</p>
+            <div class="event-type" style="color:var(--text-faint);">📍 Attended · 53 State St, Boston</div>
+          </div>
+        </div>
+        <div class="event-item" style="border-color:var(--border-dark);">
+          <div class="event-date">
+            <div class="event-date-month">JAN</div>
+            <div class="event-date-day">30</div>
+          </div>
+          <div class="event-info">
+            <h4 style="color:var(--text-dark);">Startup Boston Dealflow Mixer</h4>
+            <p style="color:var(--text-gray);">Invite-only event connecting founders and investors for curated 1:1 conversations at Civic&nbsp;Pavilion.</p>
+            <div class="event-type" style="color:var(--text-faint);">📍 Attended · Civic Pavilion, Boston</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEBINAR REPLAYS (hidden until content is ready) -->
+  <section class="section section-dark" style="display:none;">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Past Events</p>
+        <h2 style="color:var(--text-light);">Missed one? <em class="serif-italic">Catch the replay.</em></h2>
+      </div>
+      <div class="cards-grid cards-3">
+        <div class="card">
+          <div class="card-icon">🎬</div>
+          <h3>Introduction to Hyper-fractional Marketing</h3>
+          <p>Coming soon.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎬</div>
+          <h3>The 5 Signs Your GTM Strategy Needs a Reset</h3>
+          <p>Coming soon.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎬</div>
+          <h3>Building Customer Lifecycle Programs from Scratch</h3>
+          <p>Coming soon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo"><span class="footer-logo-mark">f.</span><span>foundational</span></div>
+        <div class="footer-links"><a href="about.html">About Me</a><a href="services.html">Services</a><a href="investing.html">Investing</a><a href="results.html">Results</a><a href="resources.html" style="display:none">Resources</a><a href="events.html">Events</a><a href="contact.html">Contact</a><a href="https://www.linkedin.com/in/jessica-angell-carlson-b0a395/" target="_blank">LinkedIn ↗</a></div>
+        <div class="footer-right">© 2026 Foundational. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+        const toggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    // Mobile: tap Services to expand child links
+    document.querySelectorAll('.nav-dropdown-toggle').forEach(btn => {
+      btn.addEventListener('click', e => {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          btn.closest('.nav-item-dropdown').classList.toggle('open');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

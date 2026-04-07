@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><title>Image Test</title>
+<style>
+  body { background: #333; padding: 20px; }
+  img { display: block; max-width: 300px; margin: 10px; border: 3px solid lime; }
+  .broken { border-color: red; }
+  p { color: white; }
+</style>
+</head>
+<body>
+  <p>Test 1 - jessie-about.jpg:</p>
+  <img src="jessie-about.jpg" onerror="this.classList.add('broken'); this.nextSibling.textContent='BROKEN'" />
+  <p></p>
+  
+  <p>Test 2 - 06102024BTP-17.jpg:</p>
+  <img src="06102024BTP-17.jpg" onerror="this.classList.add('broken'); this.nextSibling.textContent='BROKEN'" />
+  <p></p>
+  
+  <p>Test 3 - 667319792062463577.jpg:</p>
+  <img src="667319792062463577.jpg" onerror="this.classList.add('broken'); this.nextSibling.textContent='BROKEN'" />
+  <p></p>
+  
+  <p>Test 4 - IMG_0725.jpeg:</p>
+  <img src="IMG_0725.jpeg" onerror="this.classList.add('broken'); this.nextSibling.textContent='BROKEN'" />
+  <p></p>
+</body>
+</html>
